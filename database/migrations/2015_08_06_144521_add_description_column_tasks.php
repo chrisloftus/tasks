@@ -13,7 +13,7 @@ class AddDescriptionColumnTasks extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->text('description');
+            $table->text('description')->nullable();
         });
     }
 

@@ -25,29 +25,18 @@
             </ol>
         </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-2 col-sm-offset-2">
 
         <p><strong>Project</strong>:<br> {{ project.name }}</p>
 
         <div class="form-group">
-            <!-- <p>{{ parseStatus(task.status) }}</p> -->
-            <label>
-                Status:
-                <select class="form-control">
-                    <option value="0">Open</option>
-                    <option value="1">Resolved</option>
-                    <option value="2">Closed</option>
-                </select>
-            </label>
+            <label for="status">Status:</label>
+            <select class="form-control" ng-change="taskStatusChange(task.id, selectedTaskStatus)" ng-model="selectedTaskStatus" ng-options="taskStatus.id as taskStatus.name for taskStatus in taskStatuses" id="status"></select>
         </div>
 
         <div class="form-group">
-            <label>
-                Assigned To:
-                <select class="form-control">
-                    <option value="1">Chris Loftus</option>
-                </select>
-            </label>
+            <label for="assigned">Assigned To:</label>
+            <select class="form-control" id="assigned" ng-model="selectedUser" ng-options="user.id as user.name for user in users"></select>
         </div>
 
     </div>

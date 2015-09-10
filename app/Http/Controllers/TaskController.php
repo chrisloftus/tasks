@@ -20,13 +20,17 @@ class TaskController extends Controller
 
     public function index()
     {
-        return Task::all();
+        return Task::latest()->with('project', 'status')->get();
     }
 
     public function store()
     {
         Task::create([
-            'name' => Input::get('name')
+            'name' => Input::get('name'),
+            'description' => Input::get('description'),
+            'project_id' => Input::get('project_id'),
+            'user_id' => Input::get('assigned'),
+            'status' => 1
         ]);
 
         return ['success' => true];
@@ -50,12 +54,22 @@ class TaskController extends Controller
 
     public function showComments($id)
     {
-        return Task::find($id)->comments()->orderBy('created_at', 'desc')->get();
+        return Task::find($id)->comments()->latest()->get();
     }
 
     public function destroy($id)
     {
         Task::destroy($id);
+
+        return ['success' => true];
+    }
+
+    public function update($id)
+    {
+        $task = Task::find($id);
+
+        $task['status'] = Input::get('status');
+        $task->save();
 
         return ['success' => true];
     }

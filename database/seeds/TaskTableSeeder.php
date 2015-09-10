@@ -18,21 +18,24 @@ class TaskTableSeeder extends Seeder
             'name' => 'Update Footer Copy',
             'description' => 'Lorem ipsum dolor sit amet',
             'project_id' => 1,
-            'status' => rand(0, 2)
+            'user_id' => 1,
+            'status' => rand(1, 3)
         ]);
 
         Task::create([
             'name' => 'Fix Modal',
             'description' => 'Lorem ipsum dolor sit amet',
             'project_id' => 2,
-            'status' => rand(0, 2)
+            'user_id' => 2,
+            'status' => rand(1, 3)
         ]);
 
         Task::create([
             'name' => 'Code Contact Page',
             'description' => 'Lorem ipsum dolor sit amet',
             'project_id' => 3,
-            'status' => rand(0, 2)
+            'user_id' => 3,
+            'status' => rand(1, 3)
         ]);
     }
 }

@@ -37,6 +37,11 @@
                 templateUrl: '/partials/tasks/index',
                 controller: 'TaskController'
             })
+            .state('taskNew', {
+                url: '/tasks/new',
+                templateUrl: '/partials/tasks/new',
+                controller: 'TaskController'
+            })
             .state('task', {
                 url: '/tasks/:id',
                 templateUrl: '/partials/tasks/show',
@@ -138,7 +143,7 @@
     angular.module('habitsApp')
         .factory('Task', function($http) {
             return {
-                // get all projects
+                // get all tasks
                 get: function(id) {
                     if(id !== undefined) {
                         return $http.get('/api/tasks/' + id);
@@ -156,7 +161,7 @@
                     return $http.get('/api/tasks/' + id + '/project');
                 },
 
-                // save a project
+                // save a task
                 save: function(taskData) {
                     return $http({
                         method: 'POST',
@@ -191,9 +196,10 @@
 (function() {
     angular.module('habitsApp')
 
-        .controller('TaskController', function($scope, $state, $rootScope, $http, $stateParams, Task) {
+        .controller('TaskController', function($scope, $state, $rootScope, $http, $stateParams, Task, Project, User) {
 
             if(!$rootScope.authenticated) {
+                console.log('not authenticated');
                 $state.go('auth');
             }
 
@@ -203,12 +209,42 @@
 
             if($stateParams.id) {
                 // single task view
+
+                // task status (open, resolved, closed)
+                $scope.taskStatuses = [
+                    { id: 0, name: 'Open' },
+                    { id: 1, name: 'Resolved' },
+                    { id: 2, name: 'Closed' }
+                ];
+
                 // get the task
                 Task.get($stateParams.id)
                     .success(function(data) {
                         $scope.task = data;
                         $scope.loading = false;
+                        $scope.selectedTaskStatus = $scope.task.status;
+                        $scope.selectedUser = $scope.task.user_id;
                     });
+
+                $scope.taskStatusChange = function(taskId, status) {
+
+                    $http.put('/api/tasks/' + taskId, { status: status })
+                        .success(function(result) {
+                            console.log(result);
+                        })
+                        .error(function() {
+                            console.log('error');
+                        });
+
+                    // return $http({
+                    //     method: 'PUT',
+                    //     url: '/api/tasks/' + taskId,
+                    //     headers: {
+                    //         'Content-Type': 'application/x-www-form-urlencoded'
+                    //     },
+                    //     data: $.param(status)
+                    // });
+                };
 
                 // get the task comments
                 Task.getComments($stateParams.id)
@@ -244,6 +280,7 @@
                     .success(function(data) {
                         $scope.project = data;
                     });
+
             } else {
                 // task list view
                 Task.get()
@@ -256,28 +293,29 @@
                     });
             }
 
-            $scope.parseStatus = function(status) {
-                var text = 'Open';
-                if(status === 1) {
-                    text = 'Resolved';
-                }
-                if(status === 2) {
-                    text = 'Closed';
-                }
+            Project.get()
+                .success(function(projects) {
+                    $scope.projects = projects;
+                });
 
-                return text;
-            };
+            // users for 'assigned to' dropdown
+            User.get()
+                .success(function(users) {
+                    $scope.users = users;
+                });
 
             $scope.submitTask = function() {
                 $scope.loading = true;
 
                 Task.save($scope.taskData)
                     .success(function(data) {
-                        Task.get()
-                            .success(function(getData) {
-                                $scope.tasks = getData;
-                                $scope.loading = false;
-                            });
+                        // reload the tasks
+                        // Task.get()
+                        //     .success(function(getData) {
+                        //         $scope.tasks = getData;
+                        //         $scope.loading = false;
+                        //     });
+                        $state.go('tasks');
                     })
                     .error(function(data) {
                         console.log(data);
@@ -324,6 +362,18 @@
                 // destroy a project
                 destroy: function(id) {
                     return $http.delete('/api/projects/' + id);
+                }
+            };
+        });
+})();
+
+(function() {
+    angular.module('habitsApp')
+        .factory('User', function($http) {
+            return {
+                // get users
+                get: function() {
+                    return $http.get('/api/users');
                 }
             };
         });

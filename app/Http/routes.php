@@ -32,6 +32,10 @@ Route::get('partials/tasks/show', function() {
     return view('partials/tasks/show');
 });
 
+Route::get('partials/tasks/new', function() {
+    return view('partials/tasks/new');
+});
+
 Route::get('partials/projects/index', function() {
     return view('partials/projects/index');
 });
@@ -52,6 +56,8 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::get('tasks/{id}/comments', 'TaskController@showComments');
     Route::post('tasks/{id}/comments', 'TaskController@storeComment');
+
+    Route::get('users', 'UserController@index');
 });
 
 // App::missing(function($exception) {
