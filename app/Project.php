@@ -8,6 +8,14 @@ class Project extends Model
 {
     public function tasks()
     {
-        // return $this->hasMany('App\Task');
+        return $this->hasMany('App\Task');
+    }
+
+    /**
+     * The users that belong to the project.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
     }
 }

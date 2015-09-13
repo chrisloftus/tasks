@@ -211,11 +211,13 @@
                 // single task view
 
                 // task status (open, resolved, closed)
-                $scope.taskStatuses = [
-                    { id: 0, name: 'Open' },
-                    { id: 1, name: 'Resolved' },
-                    { id: 2, name: 'Closed' }
-                ];
+                $http.get('/api/statuses')
+                    .success(function(statuses) {
+                        $scope.statuses = statuses;
+                    })
+                    .error(function() {
+                        console.log('error');
+                    });
 
                 // get the task
                 Task.get($stateParams.id)
@@ -226,6 +228,7 @@
                         $scope.selectedUser = $scope.task.user_id;
                     });
 
+                // update task status
                 $scope.taskStatusChange = function(taskId, status) {
 
                     $http.put('/api/tasks/' + taskId, { status: status })
@@ -235,15 +238,33 @@
                         .error(function() {
                             console.log('error');
                         });
+                };
 
-                    // return $http({
-                    //     method: 'PUT',
-                    //     url: '/api/tasks/' + taskId,
-                    //     headers: {
-                    //         'Content-Type': 'application/x-www-form-urlencoded'
-                    //     },
-                    //     data: $.param(status)
-                    // });
+                // update task assigned to
+                $scope.taskAssignedChange = function(taskId, assigned) {
+                    $http.put('/api/tasks/' + taskId, {
+                        user_id: assigned
+                    })
+                    .success(function(result) {
+                        console.log(result);
+                    })
+                    .error(function() {
+                        console.log('error');
+                    });
+                }
+
+                // update task info
+                $scope.taskChange = function(taskId, status, assigned) {
+                    $http.put('/api/tasks/' + taskId, {
+                        status: status,
+                        user_id: assigned
+                    })
+                    .success(function(result) {
+                        console.log(result);
+                    })
+                    .error(function() {
+                        console.log('error');
+                    });
                 };
 
                 // get the task comments

@@ -17,8 +17,8 @@ elixir(function(mix) {
 
     // Concat the dependencies
     mix.scripts([
-        // 'moment/min/moment.min.js',
-        // 'jquery/dist/jquery.min.js',
+        'moment/min/moment.min.js',
+        'jquery/dist/jquery.min.js',
         'angular/angular.min.js',
         'ui-router/angular-ui-router.js',
         'satellizer/satellizer.min.js'
@@ -30,10 +30,8 @@ elixir(function(mix) {
     // Concat the dependencies and app
     mix.scripts([
         'node_modules.js',
-        // 'app.js',
-        // 'controllers/AuthController.js',
-        // 'controllers/UserController.js'
-        // 'services/**/*.js',
-        // 'controllers/**/*.js'
+        'app.js',
+        'services/**/*.js',
+        'controllers/**/*.js'
     ]);
 });

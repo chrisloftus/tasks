@@ -14,22 +14,22 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
 
         App\User::create([
-            'name' => 'John',
-            'email' => 'john@example.com',
+            'name' => 'Chris',
+            'email' => 'chris@example.com',
             'password' => bcrypt('secret')
-        ]);
+        ])->projects()->attach([1, 2, 3]);
 
         App\User::create([
             'name' => 'Jack',
             'email' => 'jack@example.com',
             'password' => bcrypt('secret')
-        ]);
+        ])->projects()->attach([1, 2, 3]);
 
         App\User::create([
             'name' => 'James',
             'email' => 'james@example.com',
             'password' => bcrypt('secret')
-        ]);
+        ])->projects()->attach([1, 2, 3]);
 
     }
 }

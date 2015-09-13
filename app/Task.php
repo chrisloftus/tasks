@@ -20,6 +20,7 @@ class Task extends Model
 
     public function status()
     {
+        // hasOne?
         return $this->belongsTo('App\Status', 'status');
     }
 }

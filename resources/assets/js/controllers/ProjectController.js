@@ -1,7 +1,11 @@
 (function() {
-    angular.module('ProjectController', [])
+    angular.module('habitsApp')
 
-        .controller('ProjectController', function($scope, $http, Project) {
+        .controller('ProjectController', function($state, $scope, $rootScope, $http, Project) {
+
+            if(!$rootScope.authenticated) {
+                $state.go('auth');
+            }
 
             $scope.projectData = {};
 

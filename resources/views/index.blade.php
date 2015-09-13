@@ -68,12 +68,6 @@
         </div>
     </div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
-    <!-- <script src="//cdn.jsdelivr.net/satellizer/0.12.2/satellizer.min.js"></script> -->
-    <script src="js/app.js"></script>
-    <!-- <script src="js/all.js"></script> -->
+    <script src="js/all.js"></script>
 </body>
 </html>

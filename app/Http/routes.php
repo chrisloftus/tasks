@@ -58,6 +58,8 @@ Route::group(['prefix' => 'api'], function() {
     Route::post('tasks/{id}/comments', 'TaskController@storeComment');
 
     Route::get('users', 'UserController@index');
+
+    Route::get('statuses', 'StatusController@index');
 });
 
 // App::missing(function($exception) {

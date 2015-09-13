@@ -1,8 +1,8 @@
 (function() {
-    angular.module('taskService', [])
+    angular.module('habitsApp')
         .factory('Task', function($http) {
             return {
-                // get all projects
+                // get all tasks
                 get: function(id) {
                     if(id !== undefined) {
                         return $http.get('/api/tasks/' + id);
@@ -20,7 +20,7 @@
                     return $http.get('/api/tasks/' + id + '/project');
                 },
 
-                // save a project
+                // save a task
                 save: function(taskData) {
                     return $http({
                         method: 'POST',

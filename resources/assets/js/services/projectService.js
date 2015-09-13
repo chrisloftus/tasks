@@ -1,5 +1,5 @@
 (function() {
-    angular.module('projectService', [])
+    angular.module('habitsApp')
         .factory('Project', function($http) {
             return {
                 // get all projects

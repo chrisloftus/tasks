@@ -6,8 +6,8 @@
     function UserController($http) {
         var vm = this;
 
-        vm.users = {};
-        vm.error = {};
+        vm.users;
+        vm.error;
 
         vm.getUsers = function() {
             // This request will hit the index method in the AuthenticateController

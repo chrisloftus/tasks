@@ -49,12 +49,13 @@ class TaskController extends Controller
 
     public function show($id)
     {
-        return Task::find($id);
+        // return Task::find($id)->with('project', 'comments')->get();
+        return Task::where('id', $id)->with('project', 'comments')->get()[0];
     }
 
     public function showComments($id)
     {
-        return Task::find($id)->comments()->latest()->get();
+        return Task::find($id)->comments()->get();
     }
 
     public function destroy($id)
@@ -69,6 +70,7 @@ class TaskController extends Controller
         $task = Task::find($id);
 
         $task['status'] = Input::get('status');
+        $task['user_id'] = Input::get('user_id');
         $task->save();
 
         return ['success' => true];
