@@ -3469,6 +3469,9 @@ angular.module('ui.router.compat')
                     $scope.users = users;
                 });
 
+            $scope.taskData.project_id = 1;
+            $scope.taskData.assigned = 1;
+
             $scope.submitTask = function() {
                 $scope.loading = true;
 
