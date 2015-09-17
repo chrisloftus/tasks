@@ -1,5 +1,5 @@
 (function() {
-    angular.module('habitsApp')
+    angular.module('tasksApp')
         .factory('Task', function($http) {
             return {
                 // get all tasks
@@ -9,6 +9,10 @@
                     } else {
                         return $http.get('/api/tasks');
                     }
+                },
+
+                getAll: function() {
+                    return $http.get('/api/tasks/all');
                 },
 
                 // get comments for task

@@ -36,8 +36,20 @@ Route::get('partials/tasks/new', function() {
     return view('partials/tasks/new');
 });
 
+Route::get('partials/tasks/all', function() {
+    return view('partials/tasks/all');
+});
+
 Route::get('partials/projects/index', function() {
     return view('partials/projects/index');
+});
+
+Route::get('partials/projects/show', function() {
+    return view('partials/projects/show');
+});
+
+Route::get('partials/projects/new', function() {
+    return view('partials/projects/new');
 });
 
 // API
@@ -49,6 +61,8 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
 
     Route::resource('projects', 'ProjectController');
+
+    Route::get('tasks/all', 'TaskController@all');
 
     Route::resource('tasks', 'TaskController');
 

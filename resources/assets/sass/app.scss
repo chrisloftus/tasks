@@ -1,4 +1,14 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import 'angucomplete';
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    padding-bottom: 60px;
+}
 
 article {
     margin-bottom: 50px;
@@ -10,4 +20,20 @@ article h1 {
 
 label .form-control {
     font-weight: normal;
+}
+
+.footer {
+    background: #f8f8f8;
+    border-top: solid 1px #e7e7e7;
+    bottom: 0;
+    color: #777;
+    padding: 15px 0 5px;
+    position: absolute;
+    width: 100%;
+}
+
+@media (min-width: $screen-sm-min) {
+
+
+
 }

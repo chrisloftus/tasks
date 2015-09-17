@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStatusColumnTasks extends Migration
+class AddAssignedColumnTasks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddStatusColumnTasks extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->integer('status_id')->unsigned();
-
-            // $table->foreign('status_id')
-            //     ->references('id')->on('statuses');
+            $table->integer('assigned')->unsigned();
+            $table->foreign('assigned')->references('id')->on('users');
         });
     }
 
@@ -28,10 +26,8 @@ class AddStatusColumnTasks extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            // DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-            // $table->dropForeign('tasks_status_id_foreign');
-            $table->dropColumn('status_id');
-            // DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+            $table->dropForeign('tasks_assigned_foreign');
+            $table->dropColumn('assigned');
         });
     }
 }

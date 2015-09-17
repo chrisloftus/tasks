@@ -1,4 +1,4 @@
-<h1>Tasks</h1>
+<h1>All Tasks</h1>
 
 <?php include('_header.php'); ?>
 
@@ -9,13 +9,15 @@
         <tr>
             <th>Name</th>
             <th>Project</th>
+            <th>Assigned To</th>
             <th>Status</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="task in tasks">
+        <tr ng-repeat="task in tasksAll">
             <td><a href="#/tasks/{{ task.id }}">{{ task.name }}</a></td>
             <td>{{ task.project.name }}</td>
+            <td>{{ task.assigned.name }}</td>
             <td>{{ task.status.name }}</td>
         </tr>
     </tbody>

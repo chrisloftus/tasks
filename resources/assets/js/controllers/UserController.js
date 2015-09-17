@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module('habitsApp')
+        .module('tasksApp')
         .controller('UserController', UserController);
 
     function UserController($http) {

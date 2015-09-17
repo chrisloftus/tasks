@@ -1,9 +1,9 @@
 (function() {
     angular
-        .module('habitsApp')
+        .module('tasksApp')
         .controller('AuthController', AuthController);
 
-    function AuthController($auth, $state, $http, $rootScope) {
+    function AuthController($auth, $state, $http, $rootScope, $scope) {
         var vm = this;
 
         vm.loginError = false;

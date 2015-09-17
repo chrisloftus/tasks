@@ -1,13 +1,14 @@
 <!doctype html>
-<html lang="en" ng-app="habitsApp">
+<html lang="en" ng-app="tasksApp">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Habits</title>
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body>
+<body ng-controller="NavController">
 
-    <nav class="navbar navbar-default" ng-controller="NavController">
+    <nav class="navbar navbar-default">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -22,10 +23,10 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" ng-if="authenticated">
                     <li><a href="#/tasks">Tasks</a></li>
                     <li><a href="#/projects">Projects</a></li>
-                    <li ng-if="authenticated"><a href="#" ng-click="logout()">Logout</a></li>
+                    <li><a href="#" ng-click="logout()">Logout</a></li>
                     <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -67,6 +68,12 @@
 
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Copyright Habits 2015</p>
+        </div>
+    </footer>
 
     <script src="js/all.js"></script>
 </body>

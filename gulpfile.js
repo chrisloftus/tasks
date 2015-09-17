@@ -21,7 +21,8 @@ elixir(function(mix) {
         'jquery/dist/jquery.min.js',
         'angular/angular.min.js',
         'ui-router/angular-ui-router.js',
-        'satellizer/satellizer.min.js'
+        'satellizer/satellizer.min.js',
+        'angucomplete-alt/dist/angucomplete-alt.min.js'
     ],
     'resources/assets/js/node_modules.js',
     'node_modules/'

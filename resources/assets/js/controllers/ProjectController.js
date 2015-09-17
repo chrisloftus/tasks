@@ -1,7 +1,7 @@
 (function() {
-    angular.module('habitsApp')
+    angular.module('tasksApp')
 
-        .controller('ProjectController', function($state, $scope, $rootScope, $http, Project) {
+        .controller('ProjectController', function($state, $stateParams, $scope, $rootScope, $http, Project, User) {
 
             if(!$rootScope.authenticated) {
                 $state.go('auth');
@@ -11,22 +11,64 @@
 
             $scope.loading = true;
 
-            Project.get()
-                .success(function(data) {
-                    $scope.projects = data;
-                    $scope.loading = false;
+            if($stateParams.id) {
+                // projects show view
+
+                Project.get($stateParams.id)
+                    .success(function(project) {
+                        $scope.project = project;
+                    });
+
+                $scope.selectedUser = function($item) {
+
+                    // add the user to the project
+                    Project.update($stateParams.id, $item.originalObject)
+                        .success(function() {
+                            // get the new users
+                            // by getting the project again
+                            Project.get($stateParams.id)
+                                .success(function(project) {
+                                    $scope.project = project;
+                                });
+                        });
+                };
+
+            } else {
+                // projects index view
+
+                Project.get()
+                    .success(function(data) {
+                        $scope.projects = data;
+                        $scope.loading = false;
+                    });
+            }
+
+            // get the users for show project
+            // and new project views
+            User.get()
+                .success(function(users) {
+                    $scope.users = users;
                 });
+
+            $scope.projectData.users = [];
+
+            // add user new project view
+            $scope.selectedUser = function($item) {
+                console.log($item.originalObject);
+                // if($item.length !== undefined) {
+                    var idAndName = { id: $item.originalObject.id, name: $item.originalObject.name };
+                    $scope.projectData.users.push(idAndName);
+                // }
+            };
 
             $scope.submitProject = function() {
                 $scope.loading = true;
 
+                console.log($scope.projectData);
+
                 Project.save($scope.projectData)
                     .success(function(data) {
-                        Project.get()
-                            .success(function(getData) {
-                                $scope.projects = getData;
-                                $scope.loading = false;
-                            });
+                        $state.go('projects');
                     })
                     .error(function(data) {
                         console.log(data);

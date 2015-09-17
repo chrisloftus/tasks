@@ -1,8 +1,9 @@
 (function() {
 
-    angular.module('habitsApp', [
+    angular.module('tasksApp', [
         'ui.router',
-        'satellizer'
+        'satellizer',
+        'angucomplete-alt'
     ])
     .config(function($stateProvider, $urlRouterProvider, $authProvider) {
 
@@ -30,6 +31,11 @@
                 templateUrl: '/partials/tasks/index',
                 controller: 'TaskController'
             })
+            .state('tasksAll', {
+                url: '/tasks/all',
+                templateUrl: '/partials/tasks/all',
+                controller: 'TaskController'
+            })
             .state('taskNew', {
                 url: '/tasks/new',
                 templateUrl: '/partials/tasks/new',
@@ -43,6 +49,16 @@
             .state('projects', {
                 url: '/projects',
                 templateUrl: '/partials/projects/index',
+                controller: 'ProjectController'
+            })
+            .state('projectNew', {
+                url: '/projects/new',
+                templateUrl: '/partials/projects/new',
+                controller: 'ProjectController'
+            })
+            .state('project', {
+                url: '/projects/:id',
+                templateUrl: '/partials/projects/show',
                 controller: 'ProjectController'
             });
     })
@@ -61,7 +77,7 @@
         });
     });
 
-    angular.module('habitsApp').filter('fromNow', function() {
+    angular.module('tasksApp').filter('fromNow', function() {
         return function(date) {
             return moment(date).fromNow();
         };

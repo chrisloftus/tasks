@@ -1,5 +1,5 @@
 (function() {
-    angular.module('habitsApp')
+    angular.module('tasksApp')
 
         .controller('TaskController', function($scope, $state, $rootScope,
             $http, $stateParams, Task, User, Project) {
@@ -30,7 +30,7 @@
                     .success(function(data) {
                         $scope.task = data;
                         $scope.loading = false;
-                        $scope.selectedTaskStatus = $scope.task.status;
+                        $scope.selectedTaskStatus = $scope.task.status_id;
                         $scope.selectedUser = $scope.task.user_id;
                     });
 
@@ -91,6 +91,13 @@
                         console.log(error);
                     });
             }
+
+            Task.getAll()
+                .success(function(tasksAll) {
+                    $scope.tasksAll = tasksAll;
+                });
+
+            // TODO: Only execute below on new task page
 
             // new task - projects dropdown
             Project.get()

@@ -1,8 +1,8 @@
 (function() {
-    angular.module('habitsApp')
+    angular.module('tasksApp')
     .controller('NavController', NavController);
 
-    function NavController($scope, $auth, $rootScope) {
+    function NavController($scope, $auth, $rootScope, $location) {
         // var vm = this;
 
         $scope.logout = function() {

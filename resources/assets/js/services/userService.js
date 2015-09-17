@@ -1,5 +1,5 @@
 (function() {
-    angular.module('habitsApp')
+    angular.module('tasksApp')
         .factory('User', function($http) {
             return {
                 // get users

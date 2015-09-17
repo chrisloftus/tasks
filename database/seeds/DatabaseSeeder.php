@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserTableSeeder::class);
         $this->call(ProjectTableSeeder::class);
+        $this->call(StatusesTableSeeder::class);
         $this->call(TaskTableSeeder::class);
         $this->call(CommentTableSeeder::class);
-        $this->call(StatusesTableSeeder::class);
 
         Model::reguard();
     }

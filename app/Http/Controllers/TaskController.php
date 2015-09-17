@@ -20,17 +20,27 @@ class TaskController extends Controller
 
     public function index()
     {
-        return Task::latest()->with('project', 'status')->get();
+        $user = \Auth::user();
+        return Task::latest()->with('project', 'status')
+            ->where(['user_id' => $user->id, 'status_id' => 1])->get();
+    }
+
+    public function all()
+    {
+        return Task::latest()->with('project', 'status', 'assigned')->get();
     }
 
     public function store()
     {
+        $user = \Auth::user();
+
         Task::create([
             'name' => Input::get('name'),
             'description' => Input::get('description'),
             'project_id' => Input::get('project_id'),
-            'user_id' => Input::get('assigned'),
-            'status' => 1
+            'user_id' => $user->id,
+            'assigned' => Input::get('assigned'),
+            'status_id' => 1
         ]);
 
         return ['success' => true];
