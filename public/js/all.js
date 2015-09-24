@@ -2974,7 +2974,8 @@ angular.module('ui.router.compat')
         'satellizer',
         'angucomplete-alt'
     ])
-    .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
+    .config(function($stateProvider, $urlRouterProvider, $authProvider,
+        $httpProvider, $provide) {
 
         function redirectWhenLoggedOut($q, $injector) {
 
@@ -3162,10 +3163,6 @@ angular.module('ui.router.compat')
                     return $http.get('/api/tasks/' + id + '/comments');
                 },
 
-                getProject: function(id) {
-                    return $http.get('/api/tasks/' + id + '/project');
-                },
-
                 // save a task
                 save: function(taskData) {
                     return $http({
@@ -3267,7 +3264,8 @@ angular.module('ui.router.compat')
 (function() {
     angular.module('tasksApp')
 
-        .controller('ProjectController', function($state, $stateParams, $scope, $rootScope, $http, Project, User) {
+        .controller('ProjectController', function($state, $stateParams, $scope,
+            $rootScope, $http, Project, User) {
 
             if(!$rootScope.authenticated) {
                 $state.go('auth');
@@ -3322,7 +3320,10 @@ angular.module('ui.router.compat')
             $scope.selectedUser = function($item) {
                 console.log($item.originalObject);
                 // if($item.length !== undefined) {
-                    var idAndName = { id: $item.originalObject.id, name: $item.originalObject.name };
+                    var idAndName = {
+                        id: $item.originalObject.id,
+                        name: $item.originalObject.name
+                    };
                     $scope.projectData.users.push(idAndName);
                 // }
             };
@@ -3399,7 +3400,7 @@ angular.module('ui.router.compat')
                         user_id: assigned
                     })
                     .success(function(result) {
-                        console.log(result);
+                        // console.log(result);
                     })
                     .error(function() {
                         console.log('error');
@@ -3417,7 +3418,7 @@ angular.module('ui.router.compat')
                             userId: $rootScope.currentUser.id
                         })
                         .success(function(data) {
-                            console.log('success');
+                            // console.log('success');
 
                             $scope.formComments.message = '';
 
@@ -3479,8 +3480,8 @@ angular.module('ui.router.compat')
                     .success(function(data) {
                         $state.go('tasks');
                     })
-                    .error(function(data) {
-                        console.log(data);
+                    .error(function(error) {
+                        console.log(error);
                     });
             };
 

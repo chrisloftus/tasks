@@ -41,7 +41,7 @@
                         user_id: assigned
                     })
                     .success(function(result) {
-                        console.log(result);
+                        // console.log(result);
                     })
                     .error(function() {
                         console.log('error');
@@ -59,7 +59,7 @@
                             userId: $rootScope.currentUser.id
                         })
                         .success(function(data) {
-                            console.log('success');
+                            // console.log('success');
 
                             $scope.formComments.message = '';
 
@@ -121,8 +121,8 @@
                     .success(function(data) {
                         $state.go('tasks');
                     })
-                    .error(function(data) {
-                        console.log(data);
+                    .error(function(error) {
+                        console.log(error);
                     });
             };
 

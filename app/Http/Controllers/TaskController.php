@@ -85,11 +85,4 @@ class TaskController extends Controller
 
         return ['success' => true];
     }
-
-    public function getProjectFromTask($id)
-    {
-        $task = Task::find($id);
-
-        return Project::find($task->project_id);
-    }
 }

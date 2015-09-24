@@ -5,7 +5,8 @@
         'satellizer',
         'angucomplete-alt'
     ])
-    .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
+    .config(function($stateProvider, $urlRouterProvider, $authProvider,
+        $httpProvider, $provide) {
 
         function redirectWhenLoggedOut($q, $injector) {
 

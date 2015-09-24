@@ -1,7 +1,8 @@
 (function() {
     angular.module('tasksApp')
 
-        .controller('ProjectController', function($state, $stateParams, $scope, $rootScope, $http, Project, User) {
+        .controller('ProjectController', function($state, $stateParams, $scope,
+            $rootScope, $http, Project, User) {
 
             if(!$rootScope.authenticated) {
                 $state.go('auth');
@@ -56,7 +57,10 @@
             $scope.selectedUser = function($item) {
                 console.log($item.originalObject);
                 // if($item.length !== undefined) {
-                    var idAndName = { id: $item.originalObject.id, name: $item.originalObject.name };
+                    var idAndName = {
+                        id: $item.originalObject.id,
+                        name: $item.originalObject.name
+                    };
                     $scope.projectData.users.push(idAndName);
                 // }
             };

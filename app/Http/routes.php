@@ -38,8 +38,6 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::resource('tasks', 'TaskController');
 
-    Route::get('tasks/{id}/project', 'TaskController@getProjectFromTask');
-
     Route::get('tasks/{id}/comments', 'TaskController@showComments');
     Route::post('tasks/{id}/comments', 'TaskController@storeComment');
 

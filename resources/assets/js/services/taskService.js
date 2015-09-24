@@ -20,10 +20,6 @@
                     return $http.get('/api/tasks/' + id + '/comments');
                 },
 
-                getProject: function(id) {
-                    return $http.get('/api/tasks/' + id + '/project');
-                },
-
                 // save a task
                 save: function(taskData) {
                     return $http({

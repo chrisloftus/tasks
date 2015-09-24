@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Habits</title>
+    <title>Tasks</title>
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body ng-controller="NavController">
@@ -18,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Habits</a>
+                <a class="navbar-brand" href="#">Tasks</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,7 +71,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; Copyright Habits 2015</p>
+            <p>&copy; Copyright Tasks 2015</p>
         </div>
     </footer>
 
