@@ -6,6 +6,7 @@
 
 <p ng-show="loading">Loading...</p>
 
+
 <table class="table table-striped" ng-hide="loading">
     <tbody>
         <tr ng-repeat="project in projects">
