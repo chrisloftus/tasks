@@ -6,7 +6,10 @@
     <tbody>
         <tr ng-repeat="user in project.users">
             <td>{{ user.name }}</td>
-            <td>Remove</td>
+            <td>
+                <a class="btn btn-danger" href="javascript:void(0)"
+                    ng-click="detachUser(user.id)">Remove</a>
+            </td>
         </tr>
     </tbody>
 </table>

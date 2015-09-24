@@ -44,7 +44,24 @@ class ProjectController extends Controller
 
     public function update($id)
     {
-        \App\User::find(Input::get('id'))->projects()->attach($id);
+        $user_id = Input::get('id');
+
+        // get the projects users
+        $users = Project::find($id)->users();
+
+        // check if the user exists
+        // on the project in question
+        $user = $users->find($user_id);
+
+        if($user !== null) {
+            // project has the user
+            // remove the user from the project
+            $users->detach($user_id);
+        } else {
+            // project doesn't have the user
+            // add the user to the project
+            $users->attach($user_id);
+        }
 
         return ['success' => true];
     }

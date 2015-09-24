@@ -4,10 +4,10 @@
         .controller('TaskController', function($scope, $state, $rootScope,
             $http, $stateParams, Task, User, Project) {
 
-            if(!$rootScope.authenticated) {
-                console.log('not authenticated');
-                $state.go('auth');
-            }
+            // if(!$rootScope.authenticated) {
+            //     console.log('not authenticated');
+            //     $state.go('auth');
+            // }
 
             $scope.taskData = {};
 

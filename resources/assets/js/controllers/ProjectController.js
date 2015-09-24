@@ -4,9 +4,9 @@
         .controller('ProjectController', function($state, $stateParams, $scope,
             $rootScope, $http, Project, User) {
 
-            if(!$rootScope.authenticated) {
-                $state.go('auth');
-            }
+            // if(!$rootScope.authenticated) {
+            //     $state.go('auth');
+            // }
 
             $scope.projectData = {};
 
@@ -34,6 +34,24 @@
                         });
                 };
 
+                $scope.detachUser = function(id) {
+                    Project.update($stateParams.id, {
+                        id: id
+                    })
+                        .success(function() {
+                            Project.get($stateParams.id)
+                                .success(function(project) {
+                                    $scope.project.users = project.users;
+                                })
+                                .error(function() {
+                                    console.log('error');
+                                });
+                        })
+                        .error(function() {
+                            console.log('error');
+                        });
+                };
+
             } else {
                 // projects index view
 
@@ -55,14 +73,29 @@
 
             // add user new project view
             $scope.selectedUser = function($item) {
-                console.log($item.originalObject);
-                // if($item.length !== undefined) {
-                    var idAndName = {
+                if($stateParams.id) {
+                    Project.update($stateParams.id, {
                         id: $item.originalObject.id,
-                        name: $item.originalObject.name
-                    };
-                    $scope.projectData.users.push(idAndName);
-                // }
+                    })
+                        .success(function() {
+                            Project.get($stateParams.id)
+                                .success(function(project) {
+                                    $scope.project.users = project.users;
+                                });
+                        })
+                        .error(function() {
+                            console.log('error');
+                        });
+                } else {
+                    // console.log($item.originalObject);
+                    // if($item.length !== undefined) {
+                        var idAndName = {
+                            id: $item.originalObject.id,
+                            name: $item.originalObject.name
+                        };
+                        $scope.projectData.users.push(idAndName);
+                    // }
+                }
             };
 
             $scope.submitProject = function() {
